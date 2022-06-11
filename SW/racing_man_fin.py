@@ -1,14 +1,18 @@
 def solution(participant, completion):
-    answer = ''
-    participant.sort()
-    completion.sort()
+    runner_stats = {}
 
-    for i in range(len(completion)):
-        if participant[i] != completion[i]:
-            return participant[i]
+    for name in participant:
+        if name in runner_stats:
+            runner_stats[name] += 1
+        else:
+            runner_stats[name] = 1
 
-    if answer == '':
-        return participant[-1]
+    for name in completion:
+        runner_stats[name] -= 1
+
+    for name, stat in runner_stats.items():
+        if stat:
+            return name
 
 
 print(solution(["leo", "kiki", "eden"], ["eden", "kiki"]))
